@@ -1,0 +1,107 @@
+<!doctype html>
+<html class="no-js" lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+	<style>
+		html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-image: url('/images/');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .navbar {
+            z-index: 1;
+        }
+        .content {
+            padding-top: 56px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            border: 2px solid #333; /* Cor da borda escura */
+            border-radius: 8px; /* Borda arredondada (opcional) */
+            padding: 20px; /* Espaçamento interno (opcional) */
+            background-color: #f9f9f9; /* Cor de fundo opcional */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra opcional */
+}
+        }
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 600px;
+        }
+
+	</style>
+</head>
+	
+<body>
+
+	<nav th:replace="~{fragments/sidebar :: sidebarImports}"></nav>
+
+	<div class="container" style="margin-top: 50px;">
+		<h4>Encontrar Empréstimos</h4>
+		<hr>
+		<br>
+
+		<!-- Formulário para buscar por nome -->
+		<form method="post" th:action="@{/receita/pesquisa-cliente}" th:object="${cliente}">
+			<div class="input-group col-6 offset-3 mb-4">
+				<input type="text" th:field="*{nome}" class="form-control" placeholder="Buscar por nome..."
+					   oninput="this.value = this.value.toUpperCase();">
+				<div class="input-group-append">
+					<button type="submit" class="btn btn-outline-secondary">Pesquisar</button>
+				</div>
+			</div>
+		</form>
+
+		<!-- Formulário para escolher a data -->
+		<form method="get" th:action="@{/receita/listaPendentesPorData}" class="mb-4">
+			<label for="data" class="form-label">Escolha uma data:</label>
+			<input type="date" id="data" name="data" class="form-control" required />
+			<button type="submit" class="btn btn-primary offset-3 mt-2">Buscar Parcelas Pendentes</button>
+		</form>
+
+		<!-- Emprestimos pendentes e pagos -->
+		<div class="row justify-content-center">
+			<!-- Card: Empréstimos Pendentes -->
+			<div class="card" style="width: 288px; margin: 10px;">
+				<div class="card-body">
+					<h5 class="card-title">Empréstimos Pendentes</h5>
+					<p class="card-text">Busque os empréstimos pendentes.</p>
+					<a th:href="@{/receita/listaPendentes}" class="btn btn-outline-primary">Clique Aqui!</a>
+				</div>
+			</div>
+
+			<!-- Card: Empréstimos Pagos -->
+			<div class="card" style="width: 288px; margin: 10px;">
+				<div class="card-body">
+					<h5 class="card-title">Empréstimos Pagos</h5>
+					<p class="card-text">Busque os empréstimos pagos.</p>
+					<a th:href="@{/receita/listaPagos}" class="btn btn-outline-primary">Clique Aqui!</a>
+				</div>
+			</div>
+
+			<!-- Card: Valores Disponíveis -->
+			<div class="card" style="width: 288px; margin: 10px;">
+				<div class="card-body">
+					<h5 class="card-title">Valores Disponíveis</h5>
+					<p class="card-text">Busque os valores disponíveis.</p>
+					<a th:href="@{/valores}" class="btn btn-outline-primary">Clique Aqui!</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+	<nav th:replace="~{fragments/footer :: footerImports}"></nav>
+</body>
+	
+</html>

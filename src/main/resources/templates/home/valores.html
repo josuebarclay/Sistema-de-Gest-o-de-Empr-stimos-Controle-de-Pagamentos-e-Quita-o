@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pr-br" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-image: url('/images/');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .navbar {
+            z-index: 1;
+        }
+        .content {
+            padding-top: 56px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 600px;
+        }
+    </style>
+</head>
+<body>
+
+<nav th:replace="~{fragments/sidebar :: sidebarImports}"></nav>
+
+<div class="container mt-4">
+    <h2>Tabela de Capital Disponível</h2>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">CAPITAL DISPONÍVEL</th>
+            <th scope="col">PARCELAS DIÁRIAS (40 DIAS)</th>
+            <th scope="col">TOTAL</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>R$ 1.000,00</td>
+            <td>R$ 30,00</td>
+            <td>R$ 1.200,00</td>
+        </tr>
+        <tr>
+            <td>R$ 1.500,00</td>
+            <td>R$ 45,00</td>
+            <td>R$ 1.800,00</td>
+        </tr>
+        <tr>
+            <td>R$ 2.000,00</td>
+            <td>R$ 60,00</td>
+            <td>R$ 2.400,00</td>
+        </tr>
+        <tr>
+            <td>R$ 2.500,00</td>
+            <td>R$ 75,00</td>
+            <td>R$ 3.000,00</td>
+        </tr>
+        <tr>
+            <td>R$ 3.000,00</td>
+            <td>R$ 90,00</td>
+            <td>R$ 3.600,00</td>
+        </tr>
+        <tr>
+            <td>R$ 3.500,00</td>
+            <td>R$ 102,00</td>
+            <td>R$ 4.200,00</td>
+        </tr>
+        <tr>
+            <td>R$ 4.000,00</td>
+            <td>R$ 120,00</td>
+            <td>R$ 4.800,00</td>
+        </tr>
+        <tr>
+            <td>R$ 4.500,00</td>
+            <td>R$ 135,00</td>
+            <td>R$ 5.400,00</td>
+        </tr>
+        <tr>
+            <td>R$ 5.000,00</td>
+            <td>R$ 150,00</td>
+            <td>R$ 6.000,00</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="container mt-4">
+    <h2>Tabela de Capital Disponível</h2>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">CAPITAL DISPONÍVEL</th>
+            <th scope="col">PARCELAS SEMANAIS (10 DIAS)</th>
+            <th scope="col">TOTAL</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>R$ 1.000,00</td>
+            <td>R$ 130,00</td>
+            <td>R$ 1.300,00</td>
+        </tr>
+        <tr>
+            <td>R$ 1.500,00</td>
+            <td>R$ 180,00</td>
+            <td>R$ 2.500,00</td>
+        </tr>
+        <tr>
+            <td>R$ 2.000,00</td>
+            <td>R$ 250,00</td>
+            <td>R$ 2.500,00</td>
+        </tr>
+        <tr>
+            <td>R$ 2.500,00</td>
+            <td>R$ 300,00</td>
+            <td>R$ 3.000,00</td>
+        </tr>
+        <tr>
+            <td>R$ 3.000,00</td>
+            <td>R$ 360,00</td>
+            <td>R$ 3.600,00</td>
+        </tr>
+        <tr>
+            <td>R$ 3.500,00</td>
+            <td>R$ 430,00</td>
+            <td>R$ 4.300,00</td>
+        </tr>
+        <tr>
+            <td>R$ 4.000,00</td>
+            <td>R$ 480,00</td>
+            <td>R$ 4.800,00</td>
+        </tr>
+        <tr>
+            <td>R$ 4.500,00</td>
+            <td>R$ 550,00</td>
+            <td>R$ 5.500,00</td>
+        </tr>
+        <tr>
+            <td>R$ 5.000,00</td>
+            <td>R$ 600,00</td>
+            <td>R$ 6.000,00</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<nav th:replace="~{fragments/footer :: footerImports}"></nav>
+</body>
+</html>

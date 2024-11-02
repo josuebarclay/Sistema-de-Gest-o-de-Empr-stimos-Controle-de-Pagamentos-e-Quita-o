@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Footer Example</title>
+
+    <style>
+        /* Estilo básico */
+        html, body {
+            height: 100%; /* Ocupa 100% da altura da janela */
+            margin: 0;
+            display: flex;
+            flex-direction: column; /* Garante que o conteúdo seja empurrado */
+        }
+
+        /* Conteúdo da página */
+        .content {
+            flex: 1; /* Garante que o conteúdo ocupe o máximo do espaço possível */
+        }
+
+        /* Estilo do footer */
+        .footer {
+            margin-top: auto; /* Empurra o footer para o final */
+            background-color: #343a40; /* bg-dark */
+            color: white; /* text-white */
+            text-align: center; /* text-center */
+            padding: 1rem 0; /* py-4 */
+        }
+    </style>
+</head>
+<body>
+
+<!-- Seu conteúdo aqui -->
+
+<footer class="footer bg-dark text-white text-center py-4"  th:fragment="footerImports">
+    <p>🔑 Precisa de soluções eficientes e personalizadas? Fale com <strong>Josué Barclay</strong> e transforme suas ideias em resultados! 💼</p>
+    <p>📞 <strong>Contato:</strong> (67) 99211-4339</p>
+    <p>💡 Projetos de qualidade e atendimento exclusivo para você!</p>
+</footer>
+
+</body>
+</html>

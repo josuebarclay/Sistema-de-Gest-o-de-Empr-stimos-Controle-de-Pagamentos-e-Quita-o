@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pr-br" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-image: url('/images/');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .navbar {
+            z-index: 1;
+        }
+        .content {
+            padding-top: 56px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 600px;
+        }
+    </style>
+</head>
+<body>
+
+<nav th:replace="~{fragments/sidebar :: sidebarImports}"></nav>
+
+<div class="container mt-4">
+    <h2>A RECEBER DO DIA PARCELAS</h2>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">CLIENTE</th>
+            <th scope="col">DATA VENCIMENTO</th>
+            <th scope="col">Nº DA PARCELA</th>
+            <th scope="col">TIPO</th>
+            <th scope="col">VALOR (R$)</th>
+            <th scope="col">STATUS</th>
+            <th scope="col">AÇÕES</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="parcela : ${parcelasPendentes}">
+            <td th:text="${parcela.emprestimo.cliente.nome}"></td>
+            <td th:text="${parcela.dataPagamentoParcelaFormatada}"></td>
+            <td th:text="${parcela.numeroParcela}"></td>
+            <td th:text="${parcela.emprestimo.tipoPagamento == 0 ? 'DIÁRIO' : 'SEMANAL'}"></td>
+            <td th:text="${#numbers.formatDecimal(parcela.valorParcela, 2, 2)}"></td>
+            <td th:text="${parcela.pago ? 'Pago' : 'Pendente'}"></td>
+            <td>
+                <a type="button" class="btn btn-success btn-sm" data-toggle="modal" th:data-target="'#modal-warning-' + ${parcela.id}">
+                    <i class="fa fa-check"></i>&nbsp;Pagar
+                </a>
+
+                <div class="modal modal-warning fade in" th:id="'modal-warning-' + ${parcela.id}">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                                <h5 class="modal-title">Pagar</h5>
+                            </div>
+                            <div class="modal-body">
+                                <h3>Deseja realmente pagar a parcela?</h3>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Fechar</button>
+                                <a type="button" class="btn btn-sucess" th:href="@{'/receita/' + ${parcela.id} + '/pagar'}">
+                                    <i class="fa fa-check"></i>&nbsp;Sim
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <a th:if="${parcela.pago}" th:href="@{/receita/{parcelaId}/recibo(parcelaId=${parcela.id})}" class="btn btn-primary btn-sm">IMPRIMIR</a>
+            </td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="3" class="text-right"><strong>TOTAL:</strong></td>
+            <td th:text="${#numbers.formatDecimal(total, 2, 2)}"></td>
+            <td colspan="2"></td>
+        </tr>
+        </tfoot>
+    </table>
+
+    <a th:href="@{/}" class="btn btn-outline-primary btn-rounded mt-4 btn-block">VOLTAR</a>
+</div>
+<br>
+<br>
+<br>
+
+
+<!--<script>-->
+<!--    function pagarParcela(parcelaId) {-->
+<!--        fetch('/receita/' + parcelaId + '/pagar', {-->
+<!--            method: 'PATCH'-->
+<!--        }).then(response => {-->
+<!--            if (response.ok) {-->
+<!--                alert('Parcela paga com sucesso!');-->
+<!--                window.location.reload(); // Recarregar a página para atualizar o status das parcelas-->
+<!--            } else {-->
+<!--                alert('Erro ao pagar a parcela');-->
+<!--            }-->
+<!--        });-->
+<!--    }-->
+<!--</script>-->
+
+<script>
+    function imprimirRecibo(parcelaId) {
+        window.open('/receita/' + parcelaId + '/recibo', '_blank');
+    }
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<nav th:replace="~{fragments/footer :: footerImports}"></nav>
+</body>
+</html>

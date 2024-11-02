@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pr-br" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-image: url('/images/');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .navbar {
+            z-index: 1;
+        }
+        .content {
+            padding-top: 56px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 600px;
+        }
+    </style>
+</head>
+<body>
+
+<nav th:replace="~{fragments/sidebar :: sidebarImports}"></nav>
+
+<div class="container mt-4">
+    <h1 class="text-center mb-4">LISTA DE CLIENTES</h1>
+    <table class="table table-bordered table-hover">
+        <thead class="thead-light">
+        <tr>
+            <th>COD</th>
+            <th>NOME</th>
+            <th>ENDEREÇO</th>
+            <th>TELEFONE</th>
+            <th>CPF</th>
+            <th>AÇÕES</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="cliente : ${clientes}">
+            <td th:text="${cliente.id}"></td>
+            <td th:text="${cliente.nome}"></td>
+            <td th:text="${cliente.endereco}"></td>
+            <td th:text="${cliente.telefone}"></td>
+            <td th:text="${cliente.cpf}"></td>
+            <td>
+                <a class="btn btn-warning" th:href="@{editar/{id}(id=${cliente.id})}">EDITAR</a>
+                <a class="btn btn-danger" th:href="@{excluir/{id}(id=${cliente.id})}"
+                   onclick="return confirm('Tem certeza de que deseja excluir este item?')">Excluir
+                </a>
+                <div th:if="${error}" class="alert alert-danger" role="alert">
+                    <p th:text="${error}"></p>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="text-center">
+        <a th:href="@{/}" class="btn btn-outline-primary btn-rounded mt-4">VOLTAR</a>
+    </div>
+
+    <br>
+    <br>
+    <br>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<nav th:replace="~{fragments/footer :: footerImports}"></nav>
+</body>
+</html>

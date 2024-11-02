@@ -1,0 +1,183 @@
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<nav th:fragment="sidebarImports" class="sidebar sidebar-offcanvas " id="modalEdit" xmlns:th="">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+        <title>CONTROLE</title>
+
+        <style>
+            html,
+            body {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+                background-image: url('/images/'); /* Caminho para a imagem de fundo */
+                background-size: cover; /* Garante que a imagem de fundo cubra toda a área */
+                background-position: center; /* Centraliza a imagem de fundo */
+    <!--            background-repeat: no-repeat; /* Evita repetição da imagem */-->
+            }
+
+            .navbar {
+                z-index: 1; /* Garante que a barra de navegação esteja acima do conteúdo */
+            }
+
+            .content {
+    <!--            padding-top: 400px; /* Ajusta o espaçamento superior para evitar que o conteúdo fique sob a barra de navegação */-->
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100%;
+            }
+
+            .form-container {
+                background-color: rgba(255, 255, 255, 0.8); /* Cor de fundo semi-transparente para o formulário */
+                padding: 20px;
+                border-radius: 10px;
+                max-width: 600px; /* Define a largura máxima do formulário */
+            }
+            body {
+                overflow-x: hidden;
+            }
+            body {
+                padding-top: 56px;
+            }
+            .offcanvas-collapse {
+                position: fixed;
+                top: 56px;
+                bottom: 0;
+                right: 100%;
+                left: -300px;
+                width: 300px;
+                padding-right: 1rem;
+                padding-left: 1rem;
+                overflow-y: auto;
+                visibility: hidden;
+                background-color: /*#343a40*//*#f8f9fa*/#155592;
+                transition-timing-function: ease-in-out;
+                transition-duration: .3s;
+                transition-property: left, visibility;
+            }
+
+            .offcanvas-collapse {
+                align-items: start;
+                -moz-background-clip: padding;
+                -webkit-background-clip: padding;
+                background-clip: padding-box;
+                border-right: 5px solid rgba(0, 0, 0, 0.2);
+
+            }
+
+            .offcanvas-collapse.open {
+                left: 0;
+                visibility: visible;
+            }
+
+            .navbar-expand-lg .navbar-nav {
+                -ms-flex-direction: column;
+                flex-direction: column;
+            }
+
+            .nav-scroller {
+                position: relative;
+                z-index: 2;
+                height: 2.75rem;
+                overflow-y: hidden;
+            }
+            .nav-scroller .nav {
+                display: -ms-flexbox;
+                display: flex;
+                -ms-flex-wrap: nowrap;
+                flex-wrap: nowrap;
+                padding-bottom: 1rem;
+                margin-top: -1px;
+                overflow-x: auto;
+                color: rgba(255, 255, 255, .75);
+                text-align: center;
+                white-space: nowrap;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .nav-underline .nav-link {
+                padding-top: .75rem;
+                padding-bottom: .75rem;
+                font-size: .875rem;
+                color: #6c757d;
+            }
+
+            .nav-underline .nav-link:hover {
+                color: #007bff;
+            }
+
+            .footer {
+            margin-top: auto; /* Empurra o footer para o final */
+            background-color: #343a40; /* bg-dark */
+            color: white; /* text-white */
+            text-align: center; /* text-center */
+            padding: 1rem 0; /* py-4 */
+            }
+
+            .nav-underline .active {
+                font-weight: 500;
+                color: #343a40;
+            }
+
+        </style>
+
+
+    </head>
+
+    <body>
+
+    <nav class="navbar navbar-expand-lg fixed-top shadow navbar-dark navbar-offcanvas" style="background-color: #155592;">
+        <a class="navbar-brand mr-auto" href="/">ESTRATÉGIA DE FINANÇAS PESSOAIS</a>
+
+        <button class="navbar-toggler d-block border-0" type="button" id="navToggle">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="navbar-collapse offcanvas-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/receita/cadastroReceita}">CADASTRAR RECEITA <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/receita/listaReceita}">LISTA RECEITA</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/receita/listaReceitaQuitar}">PAGAR TUDO</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/clientes/cadastroCliente}">CADASTRAR CLIENTE</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/clientes/listaClientes}">LISTA CLIENTES</a>
+                </li>
+            </ul>
+        </div>
+
+    </nav>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+        console.log("document is ready");
+        $('[data-toggle="offcanvas"], #navToggle').on('click', function () {
+            $('.offcanvas-collapse').toggleClass('open')
+        })
+    });
+    window.onload = function () {
+        console.log("window is loaded");
+    };
+
+
+    </script>
+    </body>
+
+</nav>

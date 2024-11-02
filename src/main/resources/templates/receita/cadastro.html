@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pr-br" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-image: url('/images/');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .navbar {
+            z-index: 1;
+        }
+        .content {
+            padding-top: 56px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            border: 2px solid #333; /* Cor da borda escura */
+            border-radius: 8px; /* Borda arredondada (opcional) */
+            padding: 20px; /* Espaçamento interno (opcional) */
+            background-color: #f9f9f9; /* Cor de fundo opcional */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra opcional */
+}
+        }
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 600px;
+        }
+        .is-invalid {
+    border-color: red;
+}
+
+    </style>
+</head>
+<body>
+
+<nav th:replace="~{fragments/sidebar :: sidebarImports}"></nav>
+
+<div class="container mt-4">
+    <div class="content">
+        <div class="form-container">
+            <form th:action="@{/receita/salvar}" method="post" th:object="${emprestimo}">
+                <h5 class="card-title mb-4 text-center">FORMULÁRIO DE EMPRÉSTIMO</h5>
+
+                <div class="form-row">
+                    <!-- Cliente -->
+                    <div class="form-group col-md-12">
+                        <label for="cliente" class="lblCliente">Cliente:</label>
+                        <select class="form-control" th:field="*{cliente}" id="cliente">
+                            <option value="" disabled selected>Selecione um cliente</option>
+                            <option th:each="cliente : ${clientes}" th:value="${cliente.id}" th:text="${cliente.nome}"></option>
+                        </select>
+                        <div class="alert alert-danger alert-dismissible fade show" th:if="${#fields.hasErrors('cliente')}" th:errors="*{cliente}"></div>
+                    </div>
+
+                    <!-- Tipo de Pagamento -->
+                    <div class="form-group col-md-12">
+                        <label for="tipoPagamento" class="lblCliente">Tipo de Pagamento:</label>
+                        <select class="form-control" th:field="*{tipoPagamento}" id="tipoPagamento">
+                            <option value="0">Diário</option>
+                            <option value="1">Semanal</option>
+                        </select>
+                        <div class="alert alert-danger alert-dismissible fade show" th:if="${#fields.hasErrors('tipoPagamento')}" th:errors="*{tipoPagamento}"></div>
+                    </div>
+
+                    <!-- Data de Início -->
+                    <div class="form-group col-md-12">
+                        <label for="dataInicio" class="lblCliente">DATA:</label>
+                        <input type="date" class="form-control" th:field="*{dataInicio}" id="dataInicio" placeholder="DATA">
+                        <div class="alert alert-danger alert-dismissible fade show" th:if="${#fields.hasErrors('dataInicio')}" th:errors="*{dataInicio}"></div>
+                    </div>
+
+                    <!-- Valor Emprestado -->
+                    <div class="form-group col-md-12">
+                        <label for="valorEmprestado" class="lblCliente">Valor Emprestado:</label>
+                        <input type="number" class="form-control" th:field="*{valorEmprestado}" id="valorEmprestado" placeholder="Digite o valor emprestado" step="0.01" min="0">
+                        <div class="alert alert-danger alert-dismissible fade show" th:if="${#fields.hasErrors('valorEmprestado')}" th:errors="*{valorEmprestado}"></div>
+                    </div>
+
+                    <!-- Número de Parcelas -->
+                    <div class="form-group col-md-12">
+                        <label for="numeroParcelas" class="lblCliente">Quantidade de Parcelas:</label>
+                        <input type="number" class="form-control" th:field="*{numeroParcelas}" id="numeroParcelas" placeholder="Digite o número de parcelas" min="1">
+                        <div class="alert alert-danger alert-dismissible fade show" th:if="${#fields.hasErrors('numeroParcelas')}" th:errors="*{numeroParcelas}"></div>
+                    </div>
+
+                    <!-- Valor da Parcela -->
+                    <div class="form-group col-md-12">
+                        <label for="valorParcela" class="lblCliente">Valor da Parcela:</label>
+                        <input type="number" class="form-control" th:field="*{valorParcela}" id="valorParcela" placeholder="Digite o valor da parcela" step="0.01" min="0">
+                        <div class="alert alert-danger alert-dismissible fade show" th:if="${#fields.hasErrors('valorParcela')}" th:errors="*{valorParcela}"></div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-success btn-rounded mt-4 btn-block">SALVAR</button>
+            </form>
+
+            <div class="text-center mt-3">
+                <a th:href="@{/}" class="btn btn-outline-primary btn-rounded btn-block">VOLTAR</a>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<br>
+<br>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<nav th:replace="~{fragments/footer :: footerImports}"></nav>
+</body>
+</html>

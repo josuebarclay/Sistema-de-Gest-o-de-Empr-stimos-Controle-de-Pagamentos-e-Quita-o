@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Recibo</title>
+    <style>
+        .recibo-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            font-family: Arial, sans-serif;
+        }
+
+        .recibo-container h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .recibo-info {
+            margin-bottom: 20px;
+        }
+
+        .recibo-info p {
+            margin: 5px 0;
+        }
+
+        .assinatura {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .assinatura .line {
+            width: 50%;
+            height: 1px;
+            background-color: #000;
+            margin: 0 auto;
+        }
+
+        .btn-imprimir {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .btn {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+
+</head>
+<body>
+
+<nav th:replace="~{fragments/sidebar :: sidebarImports}"></nav>
+
+<div class="recibo-container">
+<div class="recibo-info mb-4">
+    <h5 class="text-center">INFORMAÇÕES DO EMPRÉSTIMO</h5>
+    <p><strong>CÓDIGO ID:</strong> <span th:text="${emprestimo.id}"></span></p>
+    <p><strong>NOME:</strong> <span th:text="${emprestimo.cliente.nome}"></span></p>
+    <p><strong>DÉBITOS R$:</strong> <span th:text="${emprestimo.saldoDevedor}"></span></p>
+</div>
+
+<div th:if="${errorMessage}" class="alert alert-danger">
+    <p th:text="${errorMessage}"></p>
+</div>
+
+<form th:action="@{/receita/{emprestimoId}/salvarRecibo(emprestimoId=${emprestimo.id})}" method="post" th:object="${emprestimo}">
+    <h5 class="card-title mb-3 text-center">COMPROVANTE DE QUITAÇÃO</h5>
+
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <label for="valorPago" class="lblCliente">VALOR PAGO R$:</label>
+            <input type="number" class="form-control" th:field="*{valorPago}" id="valorPago" placeholder="Digite o valor pago" step="0.01" min="0" required>
+            <div class="alert alert-danger alert-dismissible fade show" th:if="${#fields.hasErrors('valorPago')}" th:errors="*{valorPago}"></div>
+        </div>
+
+        <div class="form-group col-md-12">
+            <label for="observacao" class="lblCliente">OBSERVAÇÃO:</label>
+            <input type="text" class="form-control" th:field="*{observacao}" id="observacao" placeholder="Observação">
+            <div class="alert alert-danger alert-dismissible fade show" th:if="${#fields.hasErrors('observacao')}" th:errors="*{observacao}"></div>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-success btn-block">CONFIRMAR</button>
+</form>
+</div>
+<br>
+<br>
+<br>
+
+<nav th:replace="~{fragments/footer :: footerImports}"></nav>
+</body>
+</html>
